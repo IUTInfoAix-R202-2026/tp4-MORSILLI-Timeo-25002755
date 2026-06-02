@@ -42,9 +42,10 @@ public class MessageViewModel {
     //    `texte` : le texte saisi précédé de la mention "Aperçu : ".
     //    Astuce : Bindings.concat("Aperçu : ", texte).
     texte.set(message.getTexte());
-    texte.addListener((obs, ancien, nouveau) -> {
-      message.setTexte(nouveau);
-    });
+    texte.addListener(
+        (obs, ancien, nouveau) -> {
+          message.setTexte(nouveau);
+        });
     apercu.bind(Bindings.format("Aperçu : %s", texte));
   }
 
