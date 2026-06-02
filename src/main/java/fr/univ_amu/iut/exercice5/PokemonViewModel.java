@@ -1,6 +1,8 @@
 package fr.univ_amu.iut.exercice5;
 
 import com.google.inject.Inject;
+import java.util.Optional;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -37,6 +39,8 @@ public class PokemonViewModel {
     //
     // - pokemons.setAll(service.tousLesPokemons());
     // - resume.bind(Bindings.size(pokemons).asString().concat(" Pokémon"));
+    pokemons.setAll(service.tousLesPokemons());
+    resume.bind(Bindings.format("%d Pokémon", Bindings.size(pokemons)));
   }
 
   public ObservableList<Pokemon> pokemonsProperty() {
@@ -69,5 +73,15 @@ public class PokemonViewModel {
     //    S'il est déjà présent : publier un statut (sans l'ajouter en double).
     //    S'il n'existe pas : publier un statut "introuvable".
     // Astuce : Optional offre ifPresentOrElse(present, absent).
+    Optional<Pokemon> optional = service.chercherParNom(recherche.get());
+
+    optional.ifPresentOrElse(
+        e -> {
+          if (!pokemons.contains(e)) pokemons.add(e);
+          else statut.set("Quelque chose bonjour");
+        },
+        () -> {
+          statut.set("introuvable");
+        });
   }
 }
