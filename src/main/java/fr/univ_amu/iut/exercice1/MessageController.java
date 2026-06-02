@@ -1,6 +1,5 @@
 package fr.univ_amu.iut.exercice1;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
