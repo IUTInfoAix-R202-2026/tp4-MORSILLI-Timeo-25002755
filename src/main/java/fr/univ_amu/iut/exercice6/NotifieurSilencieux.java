@@ -5,7 +5,6 @@ package fr.univ_amu.iut.exercice6;
  * illustrer qu'une même interface peut avoir plusieurs implémentations interchangeables.
  */
 public class NotifieurSilencieux implements Notifieur {
-
   @Override
   public void notifier(String message) {
     // Volontairement vide : aucune notification.
